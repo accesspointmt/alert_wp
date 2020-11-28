@@ -1,0 +1,17 @@
+{
+    "name": "sectorelevenltd/apg",
+    "description": "A composer library for the Alert Payment Gateway",
+    "type": "library",
+    "minimum-stability": "stable",
+    "require": {
+        "phpseclib/phpseclib": "^2.0",
+        "mollie/polyfill-libsodium": "^1.1",
+        "pear/math_biginteger": "^1.0"
+    },
+    "autoload": {
+        "classmap": [
+            "src/APGClient.php",
+            "src/RemotePost.php"
+        ]
+    }
+}
