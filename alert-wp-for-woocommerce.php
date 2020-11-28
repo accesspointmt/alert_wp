@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: WooCommerce Alert Payment Gateway
- * Plugin URI:        ""
- * Description:       This integrates the Alert Payment Gateway into WooCommerce.
- * Version:           1.0.0
- * Author:            Sector Eleven Ltd
- * Author URI:        https://sectoreleven.mt/
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Plugin URI: ""
+ * Description: This integrates the Alert Payment Gateway into WooCommerce.
+ * Version: 1.0.0
+ * Author: Access Point
+ * Author URI: https://www.accesspoint.com.mt/
+ * License: PL-2.0+
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  * text-domain: alert-payments-woo
  * 
  * Class WC_Gateway_Alert file.
