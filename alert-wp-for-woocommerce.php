@@ -1,14 +1,17 @@
 <?php
 /**
- * Plugin Name: WooCommerce Alert Payment Gateway
+ * Plugin Name: Alert Payment Gateway for Woo
  * Plugin URI: ""
  * Description: This integrates the Alert Payment Gateway into WooCommerce.
  * Version: 1.0.0
  * Author: Access Point
+ * Developer: Access Point
  * Author URI: https://www.accesspoint.com.mt/
  * License: PL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
- * text-domain: alert-payments-woo
+ * Text Domain: alert-payments-woo
+ * 
+ * WC tested up to: 4.7.1
  * 
  * Class WC_Gateway_Alert file.
  *
