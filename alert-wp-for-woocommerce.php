@@ -22,8 +22,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) return;
 
 add_action( 'plugins_loaded', 'alert_payment_init', 11 );
-//add_filter( 'woocommerce_currencies', 'techiepress_add_ugx_currencies' );
-//add_filter( 'woocommerce_currency_symbol', 'techiepress_add_ugx_currencies_symbol', 10, 2 );
 add_filter( 'woocommerce_payment_gateways', 'add_to_woo_alert_payment_gateway');
 
 function alert_payment_init() {
@@ -38,18 +36,3 @@ function add_to_woo_alert_payment_gateway( $gateways ) {
     $gateways[] = 'WC_Gateway_Alert';
     return $gateways;
 }
-
-
-/*function techiepress_add_ugx_currencies( $currencies ) {
-	$currencies['UGX'] = __( 'Ugandan Shillings', 'alert-payments-woo' );
-	return $currencies;
-}
-
-function techiepress_add_ugx_currencies_symbol( $currency_symbol, $currency ) {
-	switch ( $currency ) {
-		case 'UGX': 
-			$currency_symbol = 'UGX'; 
-		break;
-	}
-	return $currency_symbol;
-}*/
