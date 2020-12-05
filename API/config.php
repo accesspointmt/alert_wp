@@ -37,7 +37,8 @@
         $request->CurrencyCode = "EUR";
         $request->CurrencyNumber = "978";
         $request->BankMerchantNo = $paymentGateway->settings['alert-bankmerchantno']; //Changed this
-        $request->TerminalURL = plugins_url('../API/Redirects/PAResponse.php', __FILE__ ) ;
+        //$request->TerminalURL = plugins_url('../PAResponse', __FILE__ ) ;
+        $request->TerminalURL = get_site_url(null,"PAResponse") ;
         $request->ApplicationGUID = $paymentGateway->settings['alert-merchantguid']; //Changed this
         $request->ChallengeNotificationUrl = plugins_url('../API/Redirects/ACSChallengeHandler.php', __FILE__ ) ;
         $request->Recurring = "false";

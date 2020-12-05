@@ -160,24 +160,4 @@
             
         }
     }
-
-    /*function alert_checkout_update_order_meta($order_id){
-
-        if(isset($_POST["card_holder"]) && !empty($_POST["card_holder"])){
-            update_post_meta($order_id, 'card_holder', $_POST["card_holder"]);
-        }
-
-        if(isset($_POST["card_number"]) && !empty($_POST["card_number"]) && strlen($_POST["card_number"]) >= 8 && strlen($_POST["card_number"]) <= 19){
-            update_post_meta($order_id, 'card_number', $_POST["card_number"]);
-        }
-        
-        if(isset($_POST["expiry_month"]) && !empty($_POST["expiry_month"]) && strlen($_POST["expiry_month"]) <= 2 && isset($_POST["expiry_year"]) && !empty($_POST["expiry_year"]) && strlen($_POST["expiry_month"]) == 2 && intval($_POST["expiry_year"]) >= intval(date('Y')) || (intval($_POST["expiry_year"]) == intval(date('Y')) && intval($_POST["expiry_month"]) >= intval(date('m')))){
-            update_post_meta($order_id, 'expiry_month', $_POST["expiry_month"]);
-            update_post_meta($order_id, 'expiry_year', $_POST["expiry_year"]);
-        }
-
-        if(isset($_POST["cvc"]) && !empty($_POST["cvc"])){
-            update_post_meta($order_id, 'cvc', $_POST["cvc"]);    
-        }
-    }*/
 ?>
