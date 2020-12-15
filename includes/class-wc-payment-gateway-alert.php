@@ -280,11 +280,13 @@
 				);
 			}else{
 				if($state->result == ResultTypes::Enrolled3DS2Challenge){
-					echo "To be finished";
+					//TODO to be contined
+					wc_add_notice('Transaction Failed! - 3DS2 to be supported soon');  
 				}else if($state->result == ResultTypes::Enrolled){
 					return array(
 						'result'   => 'success',
-						'redirect' =>  plugins_url('../API/Redirects/3DSFlow.php', __FILE__ ),
+						//'redirect' =>  plugins_url('../API/Redirects/3DSFlow.php', __FILE__ ),
+						'redirect' => get_site_url(null,"APG_3DSFlow") 
 					);
 				}else{
 					wc_add_notice('Transaction Failed! - '. $state->result, 'error');  
@@ -297,17 +299,17 @@
 			$request = new Request();
 			$alertPaymentResult = new Alert_Payment_Result();
 
-			$request->CardBrand = $_POST['alert-card-brand'];
+			$request->CardBrand = sanitize_text_field($_POST['alert-card-brand']);
 			
-			$request->CardNumber = str_replace(" ", "", $_POST['alert-card-number']);
-			$request->CVV2 = $_POST['alert-card-cvc'];
+			$request->CardNumber = sanitize_text_field(str_replace(" ", "", $_POST['alert-card-number']));
+			$request->CVV2 = sanitize_text_field($_POST['alert-card-cvc']);
 
-			$date = str_replace(" ", "", $_POST['expiry_year']);
+			$date = sanitize_text_field(str_replace(" ", "", $_POST['expiry_year']));
 			$date = explode("/",$date);
 
 			$request->ExpiryYear = $date[1];
 			$request->ExpiryMonth = $date[0];
-			$request->CardHolder = $_POST['alert-card-holder'];
+			$request->CardHolder = sanitize_text_field($_POST['alert-card-holder']);
 
 			$request->Amount = $order->get_total();
 			
@@ -332,7 +334,7 @@
 			$customerIp = $_SERVER['REMOTE_ADDR']; 
 			$acceptHeader = $_SERVER['HTTP_ACCEPT']; 
 			
-			$request->BrowserDataString = esc_html($_POST['hnfJSBrowserData'].'|'.$customerIp.'|'.$acceptHeader);	
+			$request->BrowserDataString = $_POST['hnfJSBrowserData'].'|'.$customerIp.'|'.$acceptHeader;	
 
 			$xml = MakePurchase($request);
 
@@ -341,7 +343,13 @@
 
 			if (($xml->Status) && ($xml->Result == ResultTypes::Enrolled)) {
 				
-				setcookie("3ds", (string)$xml->VbVPostHTML, strtotime( '+30 days' ),"/");
+				//setcookie("3ds", (string)$xml->VbVPostHTML, strtotime( '+30 days' ),"/");
+
+				if (!session_id()) {
+					session_start();
+				}
+
+				$_SESSION["3ds"] = (string)$xml->VbVPostHTML;
 				setcookie("orderid", (string)$order->get_id(),strtotime( '+30 days' ),"/");
 
 				$alertPaymentResult->result = ResultTypes::Enrolled;
@@ -355,14 +363,16 @@
 
 				}else if($xml3DS2->Result == ResultTypes::Enrolled3DS2Challenge){
 					//TODO update after server side fixes
-					$_SESSION["request"] = $request;
+					//$_SESSION["request"] = $request;
+					$alertPaymentResult->result = "3DS2 is not yet supported";
 				}else{
 					
 					$alertPaymentResult->result = $xml3DS2->Message . ' | ' . $xml3DS2->Result;
 				}
 			}else if($xml->Result == ResultTypes::Enrolled3DS2Challenge){
 				//TODO update after server side fixes
-				$_SESSION["request"] = $request;
+				//$_SESSION["request"] = $request;
+				$alertPaymentResult->result = "3DS2 is not yet supported";
 				return ResultTypes::Enrolled3DS2Challenge;
 
 			} else if ($xml->Result == ResultTypes::NotEnrolled){

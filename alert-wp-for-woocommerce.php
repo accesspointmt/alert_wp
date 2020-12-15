@@ -31,27 +31,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) return;
 
-add_action( 'plugins_loaded', 'alert_payment_init', 11 );
-add_filter( 'woocommerce_payment_gateways', 'add_to_woo_alert_payment_gateway');
+add_action( 'plugins_loaded', 'APG_init', 11 );
+add_filter( 'woocommerce_payment_gateways', 'APG_woo_integration');
 
-function alert_payment_init() {
+function APG_init() {
     if( class_exists( 'WC_Payment_Gateway' ) ) {
 
 		//Redirect Handlers
-		add_action('parse_request', 'my_custom_url_handler');		
+		add_action('parse_request', 'APG_custom_url_handler');	
+		add_action('init', 'APG_session_init');	
 
 		require_once plugin_dir_path( __FILE__ ) . '/includes/class-wc-payment-gateway-alert.php';
 		require_once plugin_dir_path( __FILE__ ) . '/includes/alert-checkout-description-fields.php';
 	}
 }
 
-function add_to_woo_alert_payment_gateway( $gateways ) {
+function APG_session_init(){
+	if (!session_id()) {
+		session_start();
+	}
+}
+
+function APG_woo_integration( $gateways ) {
     $gateways[] = 'WC_Gateway_Alert';
     return $gateways;
 }
 
-function my_custom_url_handler() {
-	if($_SERVER["REQUEST_URI"] == '/PAResponse') {
+function APG_custom_url_handler() {
+	if($_SERVER["REQUEST_URI"] == '/APG_PAResponse') {
 		try {	
 			$order = wc_get_order( $_COOKIE["orderid"]);
 
@@ -63,7 +70,7 @@ function my_custom_url_handler() {
 			//Create Post-Checkout Object for ThankYou Page
 			$objPARequest = new Request();        
 	
-			$objPARequest->TransactionReferenceID = $_POST['MD'];
+			$objPARequest->TransactionReferenceID = sanitize_text_field($_POST['MD']);
 			$objPARequest->BankMerchantNo = $paymentGateway->settings['alert-bankmerchantno'];
 			$objPARequest->CurrencyCode = "EUR";
 			$objPARequest->CurrencyNumber = "978";
@@ -83,7 +90,6 @@ function my_custom_url_handler() {
 				$order->payment_complete();
 	
 				setcookie("orderid", null, time()-3600);
-				setcookie("3ds", null, time()-3600);
 	
 				header("Location: ".$paymentGateway->get_return_url($order));
 				exit();
@@ -94,5 +100,12 @@ function my_custom_url_handler() {
 		} catch (Exception $ex) {
 			echo $ex->getMessage();
 		}
+	}else if($_SERVER["REQUEST_URI"] == '/APG_3DSFlow') {	
+		if (!session_id()) {
+			session_start();
+		}
+		
+		echo $_SESSION["3ds"];
+		exit();
 	}
  }
