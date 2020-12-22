@@ -1,14 +1,9 @@
 
 <?php 
-    session_start();
-
     require_once __DIR__ .'/../../vendor/autoload.php';
 
     use APG\ResultTypes;
     use APG\RemotePost;
-
-
-    echo json_encode($_SESSION);
 
     $response = $_POST['cres'];
     $objCheckoutRequest = unserialize(str_replace("|",'"',htmlspecialchars_decode($_POST['threeDSSessionData'])));

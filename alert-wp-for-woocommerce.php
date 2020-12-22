@@ -39,18 +39,12 @@ function APG_init() {
 
 		//Redirect Handlers
 		add_action('parse_request', 'APG_custom_url_handler');	
-		add_action('init', 'APG_session_init');	
 
 		require_once plugin_dir_path( __FILE__ ) . '/includes/class-wc-payment-gateway-alert.php';
 		require_once plugin_dir_path( __FILE__ ) . '/includes/alert-checkout-description-fields.php';
 	}
 }
 
-function APG_session_init(){
-	if (!session_id()) {
-		session_start();
-	}
-}
 
 function APG_woo_integration( $gateways ) {
     $gateways[] = 'WC_Gateway_Alert';
