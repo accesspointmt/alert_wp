@@ -75,7 +75,7 @@ function APG_custom_url_handler() {
 			$objPARequest->Amount = $order->get_total();
 			$objPARequest->TransactionType = TransactionTypes::Tentative;	
 			
-			$xml = $APGClient->ProcessPATransaction($objPARequest, $_POST['PaRes']);
+			$xml = $APGClient->ProcessPATransaction($objPARequest, sanitize_text_field($_POST['PaRes']));
 			
 			$objPARequest->TransactionReferenceID = (string)$xml->TransactionReferenceID;
 	
@@ -100,6 +100,8 @@ function APG_custom_url_handler() {
 		}
 		
 		echo $_SESSION["3ds"];
+		//echo esc_html($_SESSION["3ds"]);
+		//echo wp_kses($_SESSION["3ds"], array('input ' => array(), 'SCRIPT' => array(), 'form' => array()));
 		exit();
 	}
  }

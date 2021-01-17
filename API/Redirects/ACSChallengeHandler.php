@@ -5,7 +5,7 @@
     use APG\ResultTypes;
     use APG\RemotePost;
 
-    $response = $_POST['cres'];
+    $response = sanitize_text_field($_POST['cres']);
     $objCheckoutRequest = unserialize(str_replace("|",'"',htmlspecialchars_decode($_POST['threeDSSessionData'])));
 
     try{

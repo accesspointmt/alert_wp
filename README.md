@@ -17,4 +17,8 @@ Using the credentials given on account creation with Alert, follow the instructi
 
 Pay special attention to the User and Password fields, which must be obtained from the *.APG file given. 
 
+= How do I manually upload a plugin? =
+
+Upload this folder into the plugins directory for your wordpress site. This will give you access to the plugin from the plugin screen in the wordpress installation.
+
 `<?php code(); // goes in backticks ?>`
