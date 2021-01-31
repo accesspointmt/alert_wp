@@ -2,31 +2,7 @@
     require_once __DIR__ .'/../vendor/autoload.php';
 
     use APG\APGClient;
-    use APG\Request;
     use APG\TransactionTypes;
-
-    /*function SendTentative($amount){
-    
-        $referringUrl = get_home_url()."/checkout";
-
-        $paymentGateway = WC()->payment_gateways->payment_gateways()['alert'];
-
-        $PaymentDetails = new Request();
-        $PaymentDetails->MerchantReference = $paymentGateway->settings['alert-merchantaccount'];
-        $PaymentDetails->Amount = $amount;
-        $PaymentDetails->CurrencyCode = "EUR";
-        $PaymentDetails->CurrencyNumber = "978";
-        $PaymentDetails->BankMerchantNo = $paymentGateway->settings['alert-bankmerchantno'];
-        $PaymentDetails->ApplicationGUID = $paymentGateway->settings['alert-merchantguid'];
-        $PaymentDetails->Recurring = "false";
-        
-        $APGClient = new APGClient($paymentGateway->settings['alert-userid'], $paymentGateway->settings['alert-password'], $referringUrl);
-
-        $PaymentDetails->AMEXPurchaseType = null;
-        $PaymentDetails->TransactionType = TransactionTypes::Tentative;
-
-        return $APGClient->ProcessTransaction($PaymentDetails, false);
-    }*/
 
     function MakePurchase($request){
         $referringUrl = get_home_url()."/checkout";

@@ -1,12 +1,8 @@
 <?php
     require_once __DIR__ .'/../API/config.php';
 
-    //add_filter('woocommerce_gateway_description', 'alert_description_fields', 20,2);
     add_filter('woocommerce_credit_card_form_fields', 'alert_credit_card_form', 20,2);
     add_action('woocommerce_checkout_process', 'alert_description_fields_validation');
-    //add_action('woocommerce_checkout_update_order_meta', 'alert_checkout_update_order_meta', 10, 1);
-
-    //add_action('woocommerce_before_checkout_form', 'alert_checkout_required_js', 5, 1);
 
     function alert_checkout_required_js(){
         echo "<script language='javascript' type='text/javascript'>";
@@ -45,88 +41,6 @@
             return $default_fields;
         }
     }
-
-    /*function alert_description_fields($description, $payment_id){
-
-        if('alert' !== $payment_id){
-            return $description;
-        }
-
-        $array = GetCardBrands();
-
-        if (count($array) <= 0) {
-            return "Error establishing connection to Alert API, please try again later.";
-        }else{
-            ob_start();
-    
-            echo '<div style="display: block; width:300px; height:auto;">';
-            
-                woocommerce_form_field(
-                    'card_holder',
-                    array(
-                        'type' => 'text',
-                        'label' =>__( 'Card Holder Name', 'alert-payments-woo' ),
-                        'class' => array( 'form-row', 'form-row-wide' ),
-                        'required' => true,
-                    )
-                );  
-    
-                woocommerce_form_field(
-                    'card_brand',
-                    array(
-                        'type' => 'select',
-                        'label' =>__( 'Card Brand', 'alert-payments-woo' ),
-                        'class' => array( 'form-row', 'form-row-wide' ),
-                        'required' => true,
-                        'options' => $array,
-                    )
-                );
-
-                woocommerce_form_field(
-                    'card_number',
-                    array(
-                        'type' => 'text',
-                        'label' =>__( 'Card Number', 'alert-payments-woo' ),
-                        'class' => array( 'form-row', 'form-row-wide' ),
-                        'required' => true,
-                    )
-                );
-    
-                woocommerce_form_field(
-                    'expiry_month',
-                    array(
-                        'type' => 'number',
-                        'label' => __( 'Expiry Month', 'alert-payments-woo' ),
-                        'required' => true
-                    )
-                );
-            
-                woocommerce_form_field(
-                    'expiry_year',
-                    array(
-                        'type' => 'number',
-                        'label' => __( 'Expiry Year', 'alert-payments-woo' ),
-                        'required' => true
-                    )
-                );
-    
-                woocommerce_form_field(
-                    'cvc',
-                    array(
-                        'type' => 'number',
-                        'label' =>__( 'Card Code (CVC)', 'alert-payments-woo' ),
-                        'class' => array( 'form-row', 'form-row-wide' ),
-                        'required' => true,
-                    )
-                );
-        
-            echo '</div>';
-        
-            $description .= ob_get_clean();
-        
-            return $description;
-        }
-    }*/
 
     function alert_description_fields_validation(){
         if('alert' === $_POST['payment_method']){

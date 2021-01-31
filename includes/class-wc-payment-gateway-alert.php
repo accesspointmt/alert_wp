@@ -406,22 +406,6 @@
 		}
 
 		/**
-		 * Change payment complete order status to completed for alert orders.
-		 *
-		 * @since  3.1.0
-		 * @param  string         $status Current order status.
-		 * @param  int            $order_id Order ID.
-		 * @param  WC_Order|false $order Order object.
-		 * @return string
-		 */
-		/*public function change_payment_complete_order_status( $status, $order_id = 0, $order = false ) {
-			if ( $order && 'alert' === $order->get_payment_method() ) {
-				$status = 'completed';
-			}
-			return $status;
-		}*/
-
-		/**
 		 * Add content to the WC emails.
 		 *
 		 * @param WC_Order $order Order object.
