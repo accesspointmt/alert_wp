@@ -102,11 +102,11 @@
 					'desc_tip'    => true,
 				),
 				$this->id.'-bankmerchantno' => array(
-					'title'       => 'Bank Merchant Number',
+					'title'       => 'Merchant Account',
 					'type'        => 'text'
 				),
 				$this->id.'-merchantaccount' => array(
-					'title'       => 'Merchant Account',
+					'title'       => 'Bank Merchant Number',
 					'type'        => 'text'
 				),
 				$this->id.'-merchantguid' => array(

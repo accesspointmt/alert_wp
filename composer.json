@@ -1,8 +1,8 @@
 {
-    "name": "accesspoint/alert-woo",
-    "description": "The Alert Payment Gateway for WooCommerce",
-    "type": "wordpress-plugin",
-    "require": {
-        "accesspoint/apg": "^1.0.0"
-    }
+	"name": "accesspoint/alert-woo",
+	"description": "The Alert Payment Gateway for WooCommerce",
+	"type": "wordpress-plugin",
+	"require": {
+		"accesspoint/apg": "^1.0.1"
+	}
 }
