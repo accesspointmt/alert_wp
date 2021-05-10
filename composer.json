@@ -3,6 +3,6 @@
 	"description": "The Alert Payment Gateway for WooCommerce",
 	"type": "wordpress-plugin",
 	"require": {
-		"accesspoint/apg": "^1.0.1"
+		"accesspoint/apg": "^1.0.0"
 	}
 }
