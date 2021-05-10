@@ -10,7 +10,7 @@ use APG\ResultTypes;
  * Plugin Name: Alert Payment Gateway for Woo
  * Plugin URI: ""
  * Description: This integrates the Alert Payment Gateway into WooCommerce.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Access Point
  * Developer: Access Point
  * Author URI: https://www.accesspoint.com.mt/
